@@ -47,6 +47,7 @@ install() {
 	local -n preArr=$1
 	local -n mainArr=$2
 	local -n postArr=$3
+	local -n servArr=$4
 
 	# welcome msg
 	tput setaf 4
@@ -175,6 +176,14 @@ install() {
 		# post install
 		status_msg "CLEAN UP" "purple" "_" "purple"
 		installer ${postArr[@]}
+	fi
+
+	if ((${#servArr[@]})); then
+		echo ""
+		echo ""
+		# post install
+		status_msg "CLEAN UP" "purple" "_" "purple"
+		installer ${servArr[@]}
 	fi
 
 	tput setaf 4

@@ -6,6 +6,9 @@
 source $SCRIPTPATH/scripts/setIndicator.sh
 
 java() {
+
+  DEV_PATH=$(echo "$USER_HOME/dev/java/source")
+
 	javamain() {
 		apt install -y python3-venv
 		apt install -y maven
@@ -27,55 +30,29 @@ EOF
 	}
 
 	javadebug() {
-		NPM=$(echo $(find "$USER_HOME/.nvm/versions/node" -maxdepth 1) | sed -En "s/.*\s(.*)/\1/p")
-		NPM=$NPM"/bin/npm"
-
 		sudo -i -u $USER_NAME <<EOF
         source $USER_HOME/.nvm/nvm.sh
-         if ! [ -d $USER_HOME/dev/java-debug ]; then
-          git clone https://github.com/microsoft/java-debug $USER_HOME/dev/java-debug 
-          cd $USER_HOME/dev/java-debug 
-          LANG=C ./mvnw clean install
+
+         if ! [ -d $DEV_PATH/java-debug ]; then
+          git clone https://github.com/microsoft/java-debug $DEV_PATH/java-debug 
          fi
 
-         if ! [ -d $USER_HOME/dev/vscode-java-test ]; then
-          git clone https://github.com/microsoft/vscode-java-test $USER_HOME/dev/vscode-java-test
-          cd $USER_HOME/dev/vscode-java-test 
-          $NPM install 
-          $NPM run build-plugin 
+         if ! [ -d $DEV_PATH/vscode-java-test ]; then
+          git clone https://github.com/microsoft/vscode-java-test $DEV_PATH/vscode-java-test
          fi
 
-         if ! [ -d $USER_HOME/dev/eclipse.jdt.ls ]; then
-          git clone https://github.com/eclipse/eclipse.jdt.ls.git $USER_HOME/dev/eclipse.jdt.ls
-          cd $USER_HOME/dev/eclipse.jdt.ls
-          ./mvnw clean install -DskipTests
+         if ! [ -d $DEV_PATH/vscode-java-decompiler ]; then
+          git clone https://github.com/dgileadi/vscode-java-decompiler.git $DEV_PATH/vscode-java-decompiler
          fi
-
-         if ! [ -d $USER_HOME/dev/vscode-java-decompiler ]; then
-          git clone https://github.com/dgileadi/vscode-java-decompiler.git $USER_HOME/dev/vscode-java-decompiler
-          cd $USER_HOME/dev/vscode-java-decompiler
-          $NPM i
-         fi
-
-         if ! [ -d $USER_HOME/dev/virtualenvs/debugpy ]; then
-          python3 -m venv $USER_HOME/dev/virtualenvs/debugpy 
-          $USER_HOME/dev/virtualenvs/debugpy/bin/python3 -m pip install debugpy 
-         fi
-
 EOF
 	}
-
-	if ! [ -d "/etc/profile.d" ]; then mkdir -p /etc/profile.d; fi
-	if ! [ -f "/etc/profile.d/java.sh" ]; then
-		echo JAVA_HOME="$USER_HOME/.sdkman/candidates/java/current" | tee /etc/profile.d/java.sh
-	fi
 
 	javatools() {
 		sudo -i -u $USER_NAME <<EOF
           source $USER_HOME/.sdkman/bin/sdkman-init.sh 
-          if ! [ -d $USER_HOME/.sdkman/candidates/gradle ]; then sdk install gradle 7.1.1;fi
+          if ! [ -d $USER_HOME/.sdkman/candidates/gradle ]; then sdk install gradle 7.2;fi
           if ! [ -d $USER_HOME/.sdkman/candidates/springboot ]; then sdk install springboot;fi
-          if ! command -v java &>/dev/null; then sdk install java;fi
+          if ! [ -d $USER_HOME/.sdkman/candidates/11.0.2-open ];then sdk install java 11.0.2-open;fi
 EOF
 	}
 

@@ -22,6 +22,7 @@ tools() {
     rofi \
     fzf \
     tree \
+    fd-find \
     vifm \
     gimp \
     inkscape \
