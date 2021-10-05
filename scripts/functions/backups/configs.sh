@@ -17,6 +17,8 @@ configs() {
 	}
 
 	confmain() {
+		if ! [-d "$USER_HOME/dev/backups" ]; then mkdir -p $USER_HOME/dev/backups; fi
+		echo "0 5 * * 1 tar -zcf $(echo $USER_HOME)/dev/backups/dotfiles.tgz $(echo $USER_HOME)/.config" >>/var/spool/cron/crontabs/root
 		cd $SCRIPTPATH
 
 		if [ -z $DISPLAY ]; then
@@ -39,13 +41,19 @@ configs() {
 		sudo -i -u $USER_NAME <<EOF
 
     if ! [ -d $USER_HOME/Bilder/wallpaper ];then mkdir -p $USER_HOME/Bilder/wallpaper;fi
-    cp -R -u $SCRIPTPATH/debian-config/user-config/wallpaper  $USER_HOME/Bilder
+    cp -r $SCRIPTPATH/debian-config/user-config/wallpaper  $USER_HOME/Bilder
 
+    if ! [ -d $USER_HOME/dev/java ];then mkdir -p $USER_HOME/dev/java;fi
+    cp -r $SCRIPTPATH/debian-config/user-config/java/*  $USER_HOME/dev/java
+   
+    if [ -f /usr/bin/java-lsp.sh ];then echo $USER_PASS | sudo -S rm /usr/bin/java-lsp.sh;fi
+    echo $USER_PASS | sudo -S ln -s $USER_HOME/dev/java/java-lsp.sh /usr/bin/java-lsp.sh
+    
     if ! [ -d $USER_HOME/.icons ];then mkdir -p $USER_HOME/Bilder/.icons;fi
-    cp -R -u $SCRIPTPATH/debian-config/user-config/.icons $USER_HOME/.icons
+    cp -r $SCRIPTPATH/debian-config/user-config/.icons $USER_HOME/
 
     if ! [ -d $USER_HOME/.themes ];then mkdir -p $USER_HOME/Bilder/.themes;fi
-    cp -R -u $SCRIPTPATH/debian-config/user-config/.themes $USER_HOME/.themes
+    cp -r $SCRIPTPATH/debian-config/user-config/.themes $USER_HOME/
 
 	if ! [ -d "$USER_HOME/dev/LangugeTool" ]; then
         wget https://languagetool.org/download/LanguageTool-5.4.zip -P $USER_HOME/dev/LangugeTool

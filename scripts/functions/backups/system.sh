@@ -12,10 +12,12 @@ system() {
 			htop \
 			xinit \
 			git \
-      xserver-xephyr \
+			xserver-xephyr \
 			curl \
 			wget \
 			fuse \
+			samba \
+			cifs-utils \
 			xclip \
 			lsb-release \
 			software-properties-common \

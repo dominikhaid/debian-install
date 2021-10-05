@@ -18,6 +18,11 @@ python() {
     if ! [ -d $USER_HOME/qtile ]; then
         cd $USER_HOME && git clone git://github.com/qtile/qtile.git $USER_HOME/dev/qtile
     fi
+
+    if ! [ -d $USER_HOME/dev/virtualenvs/debugpy ]; then
+          python3 -m venv $USER_HOME/dev/virtualenvs/debugpy 
+          $USER_HOME/dev/virtualenvs/debugpy/bin/python3 -m pip install debugpy 
+    fi
 EOF
 
 		sudo -i -u $USER_NAME <<EOF

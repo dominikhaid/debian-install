@@ -19,6 +19,7 @@ source $SCRIPTPATH/scripts/colorText.sh
 source $SCRIPTPATH/scripts/pre.sh
 source $SCRIPTPATH/scripts/main.sh
 source $SCRIPTPATH/scripts/post.sh
+source $SCRIPTPATH/scripts/serv.sh
 source $SCRIPTPATH/scripts/installer.sh
 source $SCRIPTPATH/scripts/instDep.sh
 
@@ -31,21 +32,24 @@ read USER_PASS
 stty echo
 printf "\n"
 USER_HOME="/home/$USER_NAME"
+TEST_USER=$(cat /etc/passwd | gawk -F: '{ print $1 }' | gawk -e 'match($0, /'$USER_NAME'/) {print substr( $1, RSTART, RLENGTH )}')
 
-#make sure the script runs
-scriptDependend
-
-echo "
-"
-test_user=$(cat /etc/passwd | gawk -F: '{ print $1 }' | gawk -e 'match($0, /'$USER_NAME'/) {print substr( $1, RSTART, RLENGTH )}')
-if [[ "$test_user" == "" ]]; then
-	echo "
+function userTest() {
+	if [[ "$TEST_USER" == "" ]]; then
+		echo "
         No user: $USER_NAME 
         please add the user with /sbin/useradd USERNAME
         and run the script again!"
-	exit
-else
-	echo "
+		exit
+	fi
+}
+
+#make sure the script runs
+scriptDependend
+userTest
+
+echo "
+
 $C_BLUE
 ╭─────────────────────────────────────────────────────────────────────────────────────────────╮
 │$C_ORANGE                                                                                             $C_BLUE│
@@ -63,16 +67,22 @@ $C_BLUE
 ╰─────────────────────────────────────────────────────────────────────────────────────────────╯
 
 "
-	printf "$C_ORANGE($C_GREEN Q $C_ORANGE)uit ($C_GREEN N $C_ORANGE)ormal ($C_GREEN A $C_ORANGE)utomatic ?$C_GREEN"
-	echo "$C_RESET"
-	read answer
-	case $answer in
-	[Aa]*) SKIPDIALOG=1 && echo "$C_ORANGE automatic install for $USER_NAME, lean back $C_RESET" ;;
-	[Nn]*) SKIPDIALOG=0 && echo "$C_ORANGE normal install for $USER_NAME, feel free to skip certain install blocks.$C_RESET" ;;
-	[Qq]*) exit ;;
-	*) SKIPDIALOG=0 && echo "$C_ORANGE normal install for $USER_NAME, feel free to skip certain install blocks.$C_RESET" ;;
-	esac
 
+printf "$C_ORANGE($C_GREEN Q $C_ORANGE)uit ($C_GREEN N $C_ORANGE)ormal ($C_GREEN A $C_ORANGE)utomatic ($C_GREEN S $C_ORANGE)ever ?"
+echo "$C_RESET"
+
+read answer
+case $answer in
+[Aa]*) SKIPDIALOG=1 && echo "$C_ORANGE automatic install for $USER_NAME, lean back $C_RESET" ;;
+[Nn]*) SKIPDIALOG=0 && echo "$C_ORANGE normal install for $USER_NAME, feel free to skip certain install blocks.$C_RESET" ;;
+[Ss]*) SKIPDIALOG=1 && echo "$C_ORANGE server install for $USER_NAME, lean back $C_RESET" ;;
+[Qq]*) exit ;;
+*) SKIPDIALOG=0 && echo "$C_ORANGE normal install for $USER_NAME, feel free to skip certain install blocks.$C_RESET" ;;
+esac
+
+if [[ $answer == "S" ]] || [[ $answer == "s" ]]; then
+	install PRE MAIN POST SERV
+else
+	SERV=()
+	install PRE MAIN POST SERV
 fi
-
-install PRE MAIN POST

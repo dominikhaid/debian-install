@@ -32,6 +32,16 @@ php() {
 		NPM=$(echo $(find "$USER_HOME/.nvm/versions/node" -maxdepth 1) | sed -En "s/.*\s(.*)/\1/p")
 		NPM=$NPM"/bin/npm"
 
+		if ! [ -f "$USER_HOME/dev/psysh" ]; then
+			if ! [ -d "$USER_HOME/dev/" ]; then mkdir -p "$USER_HOME/dev"; fi
+			sudo -i -u $USER_NAME <<EOF
+            cd $USER_HOME/dev
+            wget https://psysh.org/psysh
+            chmod +x psysh
+EOF
+			ln -s $USER_HOME/dev/psysh /usr/bin/psysh
+		fi
+
 		if ! [ -d "$USER_HOME/dev/vscode-php-debug" ]; then
 			sudo -i -u $USER_NAME <<EOF
          	    source $USER_HOME/.nvm/nvm.sh
