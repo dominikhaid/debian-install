@@ -10,14 +10,10 @@ user=('USER SETUP' user)
 configs=('UPDATING CONFIG' configs)   
 system=('INSTALL BASE SYSTEM' system)   
 libs=('INSTALL LIBS' libs)   
-desktop=('INSTALL LXDE' desktop)   
-node=('INSTALL NODE' node)   
     
 PRE+=(
     user[@]
     system[@]
     libs[@]
-    desktop[@]
-    node[@]
     configs[@]
 )

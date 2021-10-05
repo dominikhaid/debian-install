@@ -20,8 +20,8 @@ scriptDependend() {
 		if ! command -v gawk &>/dev/null; then apt install -y gawk; fi
 	}
 
-	aptInst >$LOGPATH/out/lightdm.log 2> \
-		$LOGPATH/err/lightdm.log &
+	aptInst >$LOGPATH/out/gawk.log 2> \
+		$LOGPATH/err/gawk.log &
 
 	setIndicator "SCRIPT DEPENDENCIES" ${WORKINGICONS[2]} $!
 

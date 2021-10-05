@@ -8,13 +8,6 @@ source $SCRIPTPATH/scripts/setIndicator.sh
 
 postInstall() {
 	cleanup() {
-		systemctl disable apache2
-		systemctl disable nginx
-		systemctl enable x11vnc.service
-		systemctl start x11vnc.service
-
-		echo 1 | update-alternatives --config x-terminal-emulator
-		echo $USER_PASS | sudo -S su $USER_NAME -c "echo $USER_PASS | chsh -s '$(which zsh)'"
 
 		if ! [ -f "/usr/bin/qtile" ]; then ln -s $USER_HOME/.local/bin/qtile /usr/bin/qtile; fi
 		if ! [ -f "/usr/bin/fd" ]; then ln -s /user/bin/fdfind /usr/bin/fd; fi

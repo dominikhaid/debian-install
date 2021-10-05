@@ -45,10 +45,6 @@ EOF
 
 	setIndicator "ZSH PLUGINS" ${WORKINGICONS[1]} $!
 
-	if [ -f "$SCRIPTPATH/debian-config/user-config/.bashrc" ]; then
-		mv -f $SCRIPTPATH/debian-config/user-config/.bashrc $USER_HOME/.bashrc
-	fi
-
 	if [ -f "$SCRIPTPATH/debian-config/user-config/.zshrc" ]; then
 		mv -f $SCRIPTPATH/debian-config/user-config/.zshrc $USER_HOME/.zshrc
 	fi

@@ -8,54 +8,52 @@ source $SCRIPTPATH/scripts/setIndicator.sh
 system() {
 	sysmain() {
 		apt install -y \
-			sudo \
 			htop \
-			xinit \
-			git \
-      xserver-xephyr \
 			curl \
+			xserver-xorg \
+			xinit \
+			x11-xserver-utils \
+			cups-pdf \
+			pasystray \
+			systray-mdstat \
 			wget \
-			fuse \
 			xclip \
-			lsb-release \
+			lxpolkit \
+			zip \
+			file-roller \
+			atril \
 			software-properties-common \
-			squashfuse \
-			openssh-server \
-			aptitude \
 			autojump \
 			build-essential \
 			cmake \
-			x11vnc \
-			apt-transport-https \
-			gnupg \
-			dbus \
 			iputils-ping \
 			python \
-			figlet \
-			bluetooth \
-			nginx \
-			apache2 \
+			ripgrep \
 			ca-certificates \
-			tightvncserver \
 			cmst \
-			ufw \
-			gnome-keyring \
+			zsh \
+			vim \
+			tree \
+			fd-find \
+			fonts-firacode \
+			kitty \
+			fzf \
+			cups \
+			imagemagick \
+			nitrogen \
+			pcmanfm \
+			notification-daemon \
+			lxinput \
+			lxappearance \
+			connman-gtk \
+			lightdm \
 			python3-pip \
-			rfkill \
-			blueman \
-			bluez \
-			bluez-tools \
-			pulseaudio-module-bluetooth \
-			ssh \
-			dbus-user-session \
-			systemd \
-			x11-apps \
+			python-pip \
 			net-tools \
 			autojump \
 			exa \
 			fonts-noto-color-emoji \
 			vim-nox \
-			xvfb \
 			poppler-utils \
 			ninja-build \
 			gettext \
@@ -65,9 +63,10 @@ system() {
 			cmake \
 			g++ \
 			pkg-config \
-			unzip \
-			accountsservice
+			unzip
 
+		git clone https://github.com/dracula/vim.git $USER_HOME/.vim/pack/themes/start/dracula
+		chown -R $USER_NAME:$USER_NAME $USER_HOME/.vim
 		sed -i 's/bullseye main/bullseye non-free main/g' /etc/apt/sources.list
 
 	}
