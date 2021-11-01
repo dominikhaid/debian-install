@@ -10,15 +10,28 @@ system() {
 		apt install -y \
 			sudo \
 			htop \
+			rsync \
 			xinit \
 			git \
+			i3lock \
+			mpc \
+			xpad \
 			xserver-xephyr \
 			curl \
+			cups-pdf \
+			guvcview \
+			pasystray \
+			systray-mdstat \
 			wget \
 			fuse \
 			samba \
 			cifs-utils \
 			xclip \
+			xfce4-power-manager \
+			lxpolkit \
+			zip \
+			file-roller \
+			atril \
 			lsb-release \
 			software-properties-common \
 			squashfuse \
@@ -37,12 +50,36 @@ system() {
 			bluetooth \
 			nginx \
 			apache2 \
+			ripgrep \
 			ca-certificates \
 			tightvncserver \
 			cmst \
+			zsh \
+			vim \
+			tree \
+			fd-find \
+			fonts-firacode \
+			kitty \
+			fzf \
+			cups \
+			imagemagick \
+			nitrogen \
+			bat \
+			pcmanfm \
+			xterm \
+			notification-daemon \
+			lxinput \
+			lxappearance \
+			connman-gtk \
+			gnome-system-tools \
+			gnome-system-tools \
+			gnome-disk-utility \
+			gparted \
+			gucharmap \
+			lightdm \
+			xscreensaver \
 			ufw \
 			gnome-keyring \
-			python3-pip \
 			rfkill \
 			blueman \
 			bluez \
@@ -57,6 +94,7 @@ system() {
 			exa \
 			fonts-noto-color-emoji \
 			vim-nox \
+			arandr \
 			xvfb \
 			poppler-utils \
 			ninja-build \
@@ -68,8 +106,10 @@ system() {
 			g++ \
 			pkg-config \
 			unzip \
+			locales \
 			accountsservice
 
+		git clone https://github.com/dracula/vim.git $USER_HOME/.vim/pack/themes/start/dracula
 		sed -i 's/bullseye main/bullseye non-free main/g' /etc/apt/sources.list
 
 	}
