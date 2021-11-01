@@ -13,12 +13,13 @@ postInstall() {
 		systemctl enable x11vnc.service
 		systemctl start x11vnc.service
 
-		echo 1 | update-alternatives --config x-terminal-emulator
-		echo $USER_PASS | sudo -S su $USER_NAME -c "echo $USER_PASS | chsh -s '$(which zsh)'"
-
 		if ! [ -f "/usr/bin/qtile" ]; then ln -s $USER_HOME/.local/bin/qtile /usr/bin/qtile; fi
 		if ! [ -f "/usr/bin/fd" ]; then ln -s /user/bin/fdfind /usr/bin/fd; fi
 		apt autoremove -y
+		if command -v locale-gen &>/dev/null; then apt locale-gen; fi
+		echo 2 | update-alternatives --config x-terminal-emulator
+		echo $USER_PASS | sudo -S su $USER_NAME -c "echo $USER_PASS | chsh -s '$(which zsh)'"
+		neofetch --off --underline --color_blocks --stdout >$SCRIPTPATH/logs/out/hardware_before.log
 	}
 
 	cleanup >$LOGPATH/out/postInstall.log 2> \
