@@ -50,4 +50,5 @@ To enable a removed functions just relink it from the backup dir to ether the pr
 
 ## TODO
 
-- create an feed back for the functions
+- Wayland
+- Nvidia optional install
