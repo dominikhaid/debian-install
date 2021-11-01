@@ -18,6 +18,9 @@ EOF
 	}
 
 	rtools() {
+
+		apt install -y libxcb-xfixes0-dev libxcb-shape0-dev
+
 		sudo -i -u $USER_NAME <<EOF
 	        if ! command -v sd &>/dev/null; then
                  $USER_HOME/.cargo/bin/cargo install sd
