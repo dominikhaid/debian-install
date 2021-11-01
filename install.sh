@@ -13,15 +13,34 @@ C_ORANGE=$(tput setaf 3)
 C_GREEN=$(tput setaf 2)
 C_RESET=$(tput sgr0)
 
-#source $SCRIPTPATH/scripts/setIndicator.sh
-source $SCRIPTPATH/scripts/createStatusline.sh
-source $SCRIPTPATH/scripts/colorText.sh
-source $SCRIPTPATH/scripts/pre.sh
-source $SCRIPTPATH/scripts/main.sh
-source $SCRIPTPATH/scripts/post.sh
-source $SCRIPTPATH/scripts/serv.sh
-source $SCRIPTPATH/scripts/installer.sh
-source $SCRIPTPATH/scripts/instDep.sh
+#make sure the script runs
+scriptDependend
+
+OS=$(cat logs/out/hardware_before.log | gawk -F: '{ print $2 }' | gawk -e 'match($0, /'Debian'/)')
+KERNEL=$(cat $SCRIPTPATH/logs/out/hardware_before.log | gawk -F: '{ print $1 $2}' | gawk -e 'match($0, /'Kernel'/)' | sed 's/Kernel//g')
+GPU=$(cat $SCRIPTPATH/logs/out/hardware_before.log | gawk -F: '{ print $1 $2}' | gawk -e 'match($0, /'GPU'/)' | sed 's/GPU//g')
+
+if [[ $OS =~ "Debian" ]]; then
+	echo "
+        This script is written for Debian OS, the detect OS is: $OS.
+        Aborting !!
+        "
+	exit
+fi
+
+if [[ $KERNEL =~ "amd64" ]]; then
+	echo "
+        Detected AMD64 architecture pulling....
+        "
+	git checkout main && git pull
+fi
+
+if [[ $KERNEL =~ "armhf" ]] || [[ $KERNEL =~ "arm64" ]] || [[ $KERNEL =~ "arm7l" ]]; then
+	echo "
+        Detected ARM architecture pulling....
+        "
+	git checkout rasberry4 && git pull
+fi
 
 # Read Password
 printf "User Name: "
@@ -34,19 +53,23 @@ printf "\n"
 USER_HOME="/home/$USER_NAME"
 TEST_USER=$(cat /etc/passwd | gawk -F: '{ print $1 }' | gawk -e 'match($0, /'$USER_NAME'/) {print substr( $1, RSTART, RLENGTH )}')
 
-function userTest() {
-	if [[ "$TEST_USER" == "" ]]; then
-		echo "
+if [[ "$TEST_USER" == "" ]]; then
+	echo "
         No user: $USER_NAME 
         please add the user with /sbin/useradd USERNAME
         and run the script again!"
-		exit
-	fi
-}
+	exit
+fi
 
-#make sure the script runs
-scriptDependend
-userTest
+#source $SCRIPTPATH/scripts/setIndicator.sh
+source $SCRIPTPATH/scripts/createStatusline.sh
+source $SCRIPTPATH/scripts/colorText.sh
+source $SCRIPTPATH/scripts/pre.sh
+source $SCRIPTPATH/scripts/main.sh
+source $SCRIPTPATH/scripts/post.sh
+source $SCRIPTPATH/scripts/serv.sh
+source $SCRIPTPATH/scripts/installer.sh
+source $SCRIPTPATH/scripts/instDep.sh
 
 echo "
 
