@@ -7,6 +7,9 @@ source $SCRIPTPATH/scripts/setIndicator.sh
 
 python() {
 	build() {
+		apt install -y python-pip
+		apt install -y python3-pip
+
 		sudo -i -u $USER_NAME <<EOF
     pip3 install 'xcffib>=0.5.0'
     pip3 install --no-deps --ignore-installed cairocffi
@@ -15,7 +18,7 @@ python() {
     pip3 install qtile
     pip3 install rofimoji
 
-    if ! [ -d $USER_HOME/qtile ]; then
+    if ! [ -d $USER_HOME/dev/qtile ]; then
         cd $USER_HOME && git clone git://github.com/qtile/qtile.git $USER_HOME/dev/qtile
     fi
 
@@ -29,8 +32,8 @@ EOF
     pip3 install ueberzug
     pip3 install --user pywal
  
-if [ -d "$HOME/Bilder/wallpaper" ]; then
-    wal -n -i "$HOME/Bilder/wallpaper"
+if [ -d "$USER_HOME/Bilder/wallpaper" ]; then
+    wal -n -i "$USER_HOME/Bilder/wallpaper"
  fi
 EOF
 	}
@@ -39,6 +42,10 @@ EOF
 		$LOGPATH/err/python.log &
 
 	setIndicator "Python" ${WORKINGICONS[2]} $!
+
+	if [ -f "$USER_HOME/bin/wal" ]; then
+		ln -s $USER_HOME/.local/bin/wal /usr/bin/wal
+	fi
 }
 
 if [[ ${1} == "--debug" ]]; then
