@@ -52,7 +52,7 @@ nvim() {
     git clone https://github.com/wbthomason/packer.nvim $USER_HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
     git clone https://github.com/kabouzeid/nvim-lspinstall $USER_HOME/.local/share/nvim/site/pack/packer/start/nvim-lspinstall
 
-    echo $USER_PASS | sudo -S chown -R dominik:dominik $HOME/.local/share/nvim/ 
+    echo $USER_PASS | sudo -S chown -R dominik:dominik $USER_HOME/.local/share/nvim/ 
     
    sed -i 's/--require/require/g' $USER_HOME/.config/nvim/init.lua
    sed -i 's/--vim\./vim./g' $USER_HOME/.config/nvim/init.lua 
@@ -64,7 +64,7 @@ EOF
 
 	setIndicator "NVIM (building from source)" ${WORKINGICONS[0]} $!
 
-	if ! [ -L "/usr/bin/nvim" ]; then ln -s $USER_HOME/.local/share/nvim/build/bin/nvim /usr/bin/nvim; fi
+	if ! [ -L "/usr/bin/nvim" ]; then cp $SCRIPTPATH/debian-config/user-config/nvim /usr/bin/nvim; fi
 	if ! [ -d "$USER_HOME/dev/backups" ]; then mkdir -p $USER_HOME/dev/backups; fi
 	echo "0 5 * * 1 tar -zcf $(echo $USER_HOME)/dev/backups/nvim.tgz $(echo $USER_HOME)/.local/share/nvim" >>/var/spool/cron/crontabs/root
 
