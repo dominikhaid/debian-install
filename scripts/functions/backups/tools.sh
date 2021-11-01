@@ -8,32 +8,39 @@ source $SCRIPTPATH/scripts/setIndicator.sh
 tools() {
 
 	toolsmain() {
+
+		wget 'https://s3.hexcore.xyz/occ/linux/deb/ObinsKit_1.1.9_x64.deb' -O $USER_HOME/dev/ObinsKit.deb
+		apt install -y $USER_HOME/dev/ObinsKit.deb
+
 		sudo -i -u $USER_NAME <<EOF
     echo $USER_PASS | sudo -S apt install -yq \
     flatpak \
     snapd \
+    synaptic \
+    gnome-software \
+    libreoffice \
     filezilla \
-    kitty \
-    ripgrep \
-    fonts-firacode \
-    zsh \
-    vim \
     remmina \
     rofi \
-    fzf \
-    tree \
-    fd-find \
-    vifm \
+    evolution \
+    qbittorrent \
+    vlc \
     gimp \
     inkscape \
-    imagemagick \
     cowsay \
-    bat \
-    fortune \
-    pasystray \
-    nitrogen \
-    exuberant-ctags
+    krita \
+    darktable \
+    kdenlive \
+    fortune 
+EOF
+	}
 
+	kodi() {
+		sudo -i -u $USER_NAME <<EOF
+    echo $USER_PASS | sudo -S apt install -yq \
+    kodi \
+    kodi-inputstream-rtmp \
+    kodi-inputstream-adaptive 
 EOF
 	}
 
@@ -108,6 +115,11 @@ EOF
             prettier"
 
 	}
+
+	kodi >$LOGPATH/out/kodi.log 2> \
+		$LOGPATH/err/kodi.log &
+
+	setIndicator "KODI" ${WORKINGICONS[4]} $!
 
 	npmG >$LOGPATH/out/npm_globals.log 2> \
 		$LOGPATH/err/npm_globals.log &
