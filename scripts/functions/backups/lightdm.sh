@@ -8,15 +8,15 @@ source $SCRIPTPATH/scripts/setIndicator.sh
 lightdm() {
 	lightmain() {
 		if ! command -v light-locker &>/dev/null; then
-			apt install -y lightdm
+			apt install -y lightdm light-locker slick-greeter lightdm-settings
 		fi
 
-		if ! command -v web-greeter &>/dev/null; then
-			apt install -y python3-pyqt5.qtwebengine python3-gi
-			pip3 install whither
-
-			echo $USER_PASS | sudo -S su $USER_NAME -c "cd $USER_HOME && git clone https://github.com/Antergos/web-greeter.git $USER_HOME/dev/web-greeter"
-			cd $USER_HOME/dev/web-greeter && make install
+		if ! command -v reTheme &>/dev/null; then
+			echo $USER_PASS | sudo -S su $USER_NAME -c "cd $USER_HOME && git clone https://github.com/Paul-Houser/slickgreeter-pywal $USER_HOME/dev/slickgreeter-pywal"
+			cd $USER_HOME/dev/slickgreeter-pywal
+			chmod +x install.sh
+			./install.sh
+			reTheme $(cat $HOME/.cache/wal/wal)
 		fi
 	}
 
@@ -26,7 +26,15 @@ lightdm() {
 	setIndicator "SETUP LIGHTDM" ${WORKINGICONS[0]} $!
 
 	# TODO setup web-greeter
-	#sed -i 's/\[Seat\:\*\]/[Seat:*]\ngreeter-session=web-greeter/g' /etc/lightdm/lightdm.conf
+	if [ -z $(cat /etc/lightdm/lightdm.conf | grep 'greeter-session=slick-greeter') ]; then
+		sed -i 's/^\[Seat\:\*\]/[Seat:*]\ngreeter-session=slick-greeter/g' /etc/lightdm/lightdm.conf
+	fi
+
+	if [ -z $(cat /etc/lightdm/lightdm.conf | grep 'user-session=qtile') ]; then
+		sed -i 's/^\[Seat\:\*\]/[Seat:*]\nuser-session=qtile/g' /etc/lightdm/lightdm.conf
+	fi
+
+	$SCRIPTPATH/scripts/functions/backup/displaymanager.sh
 }
 
 if [[ ${1} == "--debug" ]]; then
