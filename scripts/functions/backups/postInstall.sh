@@ -14,6 +14,10 @@ postInstall() {
 		apt autoremove -y
 		if command -v locale-gen &>/dev/null; then locale-gen; fi
 		neofetch --off --underline --color_blocks --stdout >$SCRIPTPATH/logs/out/hardware_after.log
+
+		if [ -d "$USER_HOME/Applications" ]; then
+			chown -R $USER_NAME:$USER_NAME $USER_HOME/Applications/*
+		fi
 	}
 
 	cleanup >$LOGPATH/out/postInstall.log 2> \

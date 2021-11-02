@@ -24,8 +24,8 @@ go() {
             echo $USER_PASS | sudo -S ln -s /usr/local/go/bin/gofmt /usr/bin/gofmt
          fi
 
-        if ! command -v delv &>/dev/null; then /usr/local/go/bin/go get -u github.com/go-delve/delve/cmd/dlv; fi
-        if ! command -v lazygit &>/dev/null; then /usr/local/go/bin/go get github.com/jesseduffield/lazygit; fi 
+        /usr/local/go/bin/go get -u github.com/go-delve/delve/cmd/dlv
+        /usr/local/go/bin/go get github.com/jesseduffield/lazygit
 EOF
 
 	}
