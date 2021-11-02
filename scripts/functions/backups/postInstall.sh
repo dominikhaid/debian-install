@@ -12,6 +12,8 @@ postInstall() {
 		if ! [ -f "/usr/bin/qtile" ]; then ln -s $USER_HOME/.local/bin/qtile /usr/bin/qtile; fi
 		if ! [ -f "/usr/bin/fd" ]; then ln -s /user/bin/fdfind /usr/bin/fd; fi
 		apt autoremove -y
+		if command -v locale-gen &>/dev/null; then locale-gen; fi
+		neofetch --off --underline --color_blocks --stdout >$SCRIPTPATH/logs/out/hardware_after.log
 	}
 
 	cleanup >$LOGPATH/out/postInstall.log 2> \
