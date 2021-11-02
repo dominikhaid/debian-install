@@ -3,6 +3,7 @@
 source $SCRIPTPATH/scripts/setIndicator.sh
 
 scriptDependend() {
+	export DEBIAN_FRONTEND=noninteractive
 
 	if ! [ -d "$LOGPATH/out" ]; then
 		mkdir -p $LOGPATH/out
@@ -15,7 +16,10 @@ scriptDependend() {
 	fi
 
 	aptInst() {
-		apt update
+		apt update && apt upgrade -y
+		if ! command -v neofetch &>/dev/null; then apt install -y neofetch; fi
+		if ! command -v excpet &>/dev/null; then apt install -y excpect; fi
+		neofetch --off --underline --color_blocks --stdout >$SCRIPTPATH/logs/out/hardware_before.log
 		if ! command -v xdotool &>/dev/null; then apt install -y xdotool; fi
 		if ! command -v gawk &>/dev/null; then apt install -y gawk; fi
 	}
