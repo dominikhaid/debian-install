@@ -6,30 +6,56 @@
 source $SCRIPTPATH/scripts/setIndicator.sh
 
 system() {
+
 	sysmain() {
 		apt install -y \
+			sudo \
 			htop \
-			curl \
-			xserver-xorg \
 			xinit \
-			x11-xserver-utils \
+			rsync \
+			git \
+			i3lock \
+			mpc \
+			xpad \
+			xserver-utils \
+			xserver-xephyr \
+			curl \
 			cups-pdf \
+			guvcview \
 			pasystray \
+			xserver-org \
 			systray-mdstat \
 			wget \
+			fuse \
+			samba \
+			cifs-utils \
 			xclip \
+			xfce4-power-manager \
 			lxpolkit \
 			zip \
 			file-roller \
 			atril \
+			lsb-release \
 			software-properties-common \
+			squashfuse \
+			openssh-server \
+			aptitude \
 			autojump \
 			build-essential \
 			cmake \
+			x11vnc \
+			apt-transport-https \
+			gnupg \
+			dbus \
 			iputils-ping \
 			python \
+			figlet \
+			bluetooth \
+			nginx \
+			apache2 \
 			ripgrep \
 			ca-certificates \
+			tightvncserver \
 			cmst \
 			zsh \
 			vim \
@@ -42,18 +68,36 @@ system() {
 			imagemagick \
 			nitrogen \
 			pcmanfm \
+			xterm \
 			notification-daemon \
 			lxinput \
 			lxappearance \
 			connman-gtk \
+			gnome-system-tools \
+			gnome-system-tools \
+			gnome-disk-utility \
+			gparted \
+			gucharmap \
 			lightdm \
-			python3-pip \
-			python-pip \
+			xscreensaver \
+			ufw \
+			gnome-keyring \
+			rfkill \
+			blueman \
+			bluez \
+			bluez-tools \
+			pulseaudio-module-bluetooth \
+			ssh \
+			dbus-user-session \
+			systemd \
+			x11-apps \
 			net-tools \
 			autojump \
 			exa \
 			fonts-noto-color-emoji \
 			vim-nox \
+			arandr \
+			xvfb \
 			poppler-utils \
 			ninja-build \
 			gettext \
@@ -63,7 +107,9 @@ system() {
 			cmake \
 			g++ \
 			pkg-config \
-			unzip
+			unzip \
+			locales \
+			accountsservice
 
 		git clone https://github.com/dracula/vim.git $USER_HOME/.vim/pack/themes/start/dracula
 		chown -R $USER_NAME:$USER_NAME $USER_HOME/.vim
