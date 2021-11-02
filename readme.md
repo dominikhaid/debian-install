@@ -50,4 +50,18 @@ To enable a removed functions just relink it from the backup dir to ether the pr
 
 ## TODO
 
-- create an feed back for the functions
+
+- Bring some basic nvim commands to vim
+ - copy
+ - comments
+ - jumps
+
+- Wayland
+
+- Wayland
+
+- Checkout right branch for the system
+- Lazygit
+
+
+
