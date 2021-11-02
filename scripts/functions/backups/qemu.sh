@@ -16,11 +16,13 @@ qemu() {
 			/sbin/addgroup libvirt-qemu
 		fi
 	}
-	qemumain >$LOGPATH/out/qemu.log 2> \
-		$LOGPATH/err/qemu.log &
 
-	setIndicator "QEMU & KVM" ${WORKINGICONS[0]} $!
+	if ! [ -z $(dmesg | grep "Hypervisor detected") ]; then
+		qemumain >$LOGPATH/out/qemu.log 2> \
+			$LOGPATH/err/qemu.log &
 
+		setIndicator "QEMU & KVM" ${WORKINGICONS[0]} $!
+	fi
 }
 
 if [[ ${1} == "--debug" ]]; then

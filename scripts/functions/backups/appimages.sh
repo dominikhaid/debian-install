@@ -9,7 +9,6 @@ appimages() {
 	download() {
 		if ! [ -d "$USER_HOME/Applications" ]; then
 			mkdir -p $USER_HOME/Applications
-			chown $USER_NAME:$USER_NAME $USER_HOME/Applications
 		fi
 
 		if ! [ -f "$USER_HOME/Applications/FontBase-2.16.4.AppImage" ]; then
@@ -53,7 +52,7 @@ appimages() {
 		fi
 
 		chmod +x $USER_HOME/Applications/*
-		chown $USER_NAME:$USER_NAME $USER_HOME/Applications/*
+		chown -R $USER_NAME:$USER_NAME $USER_HOME/Applications/*
 	}
 
 	download >$LOGPATH/out/appimage.log 2> \

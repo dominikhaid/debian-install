@@ -50,5 +50,20 @@ To enable a removed functions just relink it from the backup dir to ether the pr
 
 ## TODO
 
-- Wayland
+- Warn if on know Debian version
+- Give Possibility to change the branch Advance the detected dialog slepp after pull clear screen
+- Picom
+- Fix Qemu test
+
+### VM
+
+- Qtile not build
+- I3 config not available
+
+### Next release
+
 - Nvidia optional install
+- Server Branch
+- Wayland
+- Continue Raspberry Pi branch
+- Dynamic Branch

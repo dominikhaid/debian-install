@@ -13,6 +13,7 @@ C_ORANGE=$(tput setaf 3)
 C_GREEN=$(tput setaf 2)
 C_RESET=$(tput sgr0)
 
+source $SCRIPTPATH/scripts/instDep.sh
 #make sure the script runs
 scriptDependend
 
@@ -20,7 +21,7 @@ OS=$(cat logs/out/hardware_before.log | gawk -F: '{ print $2 }' | gawk -e 'match
 KERNEL=$(cat $SCRIPTPATH/logs/out/hardware_before.log | gawk -F: '{ print $1 $2}' | gawk -e 'match($0, /'Kernel'/)' | sed 's/Kernel//g')
 GPU=$(cat $SCRIPTPATH/logs/out/hardware_before.log | gawk -F: '{ print $1 $2}' | gawk -e 'match($0, /'GPU'/)' | sed 's/GPU//g')
 
-if [[ $OS =~ "Debian" ]]; then
+if ! [[ $OS =~ "Debian" ]]; then
 	echo "
         This script is written for Debian OS, the detect OS is: $OS.
         Aborting !!
@@ -69,7 +70,6 @@ source $SCRIPTPATH/scripts/main.sh
 source $SCRIPTPATH/scripts/post.sh
 source $SCRIPTPATH/scripts/serv.sh
 source $SCRIPTPATH/scripts/installer.sh
-source $SCRIPTPATH/scripts/instDep.sh
 
 echo "
 

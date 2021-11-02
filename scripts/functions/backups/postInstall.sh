@@ -20,6 +20,10 @@ postInstall() {
 		echo 2 | update-alternatives --config x-terminal-emulator
 		echo $USER_PASS | sudo -S su $USER_NAME -c "echo $USER_PASS | chsh -s '$(which zsh)'"
 		neofetch --off --underline --color_blocks --stdout >$SCRIPTPATH/logs/out/hardware_before.log
+
+		if [ -d "$USER_HOME/Applications" ]; then
+			chown -R $USER_NAME:$USER_NAME $USER_HOME/Applications/*
+		fi
 	}
 
 	cleanup >$LOGPATH/out/postInstall.log 2> \

@@ -17,11 +17,11 @@ scriptDependend() {
 
 	aptInst() {
 		apt update && apt upgrade -y
-		if ! command -v neofetch &>/dev/null; then apt install -y neofetch; fi
-		if ! command -v excpet &>/dev/null; then apt install -y excpect; fi
-		neofetch --off --underline --color_blocks --stdout >$SCRIPTPATH/logs/out/hardware_before.log
-		if ! command -v xdotool &>/dev/null; then apt install -y xdotool; fi
-		if ! command -v gawk &>/dev/null; then apt install -y gawk; fi
+		apt install -y neofetch
+		apt install -y expect
+		neofetch --off --underline --color_blocks --stdout >$LOGPATH/out/hardware_before.log
+		apt install -y xdotool
+		apt install -y gawk
 	}
 
 	aptInst >$LOGPATH/out/gawk.log 2> \
