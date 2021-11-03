@@ -55,10 +55,6 @@ To enable a removed functions just relink it from the backup dir to ether the pr
 - Picom
 - Fix Qemu test
 
-### VM
-
-- Qtile not build
-- I3 config not available
 
 ### Next release
 
