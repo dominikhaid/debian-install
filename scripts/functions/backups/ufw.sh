@@ -6,6 +6,9 @@
 source $SCRIPTPATH/scripts/setIndicator.sh
 
 ufw() {
+
+apt install -y ufw
+
 	ufwmain() {
 		sudo -i -u $USER_NAME <<EOF
     echo $USER_PASS | sudo -S ufw enable
