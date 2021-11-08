@@ -8,7 +8,7 @@ source $SCRIPTPATH/scripts/setIndicator.sh
 python() {
 
 	apt install -y python-pip
-	apt install -y pytho3-pip
+	apt install -y python3-pip
 
 	build() {
 		sudo -i -u $USER_NAME <<EOF
