@@ -45,8 +45,6 @@ configs() {
 		if ! [ -d "/etc/resolvconf/resolv.conf.d" ]; then mkdir -p /etc/resolvconf/resolv.conf.d; fi
 
 		cp -f $SCRIPTPATH/debian-config/user-config/raspi/x11vnc.service /etc/systemd/system/x11vnc.service
-		cp -f $SCRIPTPATH/debian-config/user-config/raspi/config.debian.txt /boot/firmware/config.txt
-		cp -f $SCRIPTPATH/debian-config/user-config/raspi/cmdline.debian.txt /boot/firmware/cmdline.txt
 		cp -f $SCRIPTPATH/debian-config/user-config/raspi/.asoundrc.hifiberry $USER_HOME/.asoundrc
 		cp -f $SCRIPTPATH/debian-config/vnc/xstartup /root/.vnc/xstartup
 		cp -f $SCRIPTPATH/debian-config/vnc/tail /etc/resolvconf/resolv.conf.d/tail
@@ -70,7 +68,6 @@ configs() {
     if ! [ -d $USER_HOME/dev ];then mkdir -p $USER_HOME/dev;fi
     cp -r $SCRIPTPATH/debian-config/user-config/dev/*  $USER_HOME/dev
     echo $USER_PASS | sudo -S ln -s $USER_HOME/dev/msmb.sh /usr/bin/msmb
-    fi
 
     if ! [ -d $USER_HOME/.themes ];then mkdir -p $USER_HOME/.themes;fi
     cp -r $SCRIPTPATH/debian-config/user-config/.themes $USER_HOME/
