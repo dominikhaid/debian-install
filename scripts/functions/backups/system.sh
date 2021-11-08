@@ -17,6 +17,8 @@ system() {
 			mpc \
 			xpad \
 			xserver-xephyr \
+                        x11-xserver-utils \
+                        xserver-xorg \
 			curl \
 			cups-pdf \
 			guvcview \
