@@ -29,7 +29,7 @@ GPU=$(cat $SCRIPTPATH/logs/out/hardware_before.log | gawk -F: '{ print $1 $2}' |
 
 
 if ! [[ $OS =~ "Debian" ]] && ! [[ $OS =~ "Raspbian" ]]; then
-	echo "
+	echo ""
 	echo "
         This script is written for Debian OS, the detect OS is: $OS.
         Aborting !!
