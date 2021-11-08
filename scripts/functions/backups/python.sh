@@ -40,7 +40,7 @@ EOF
 	setIndicator "Python" ${WORKINGICONS[2]} $!
 
 	if [ -f "$USER_HOME/.local/bin/wal" ]; then
-		ln -s $USER_HOME/.local/bin/wal $USER_HOME/bin/wal
+		ln -s $USER_HOME/.local/bin/wal $USER_HOME/.local/bin/wal
 	fi
 }
 
