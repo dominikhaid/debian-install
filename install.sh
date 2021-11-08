@@ -37,7 +37,7 @@ if ! [[ $OS =~ "Debian" ]] && ! [[ $OS =~ "Raspbian" ]]; then
 	exit
 fi
 
-if ! [[ $OS =~ "Debian" ]] && ! [[ $OS =~ "Raspbian" ]]; then
+if ! [[ $KERNEL =~ "amd64" ]]; then
 	echo "
         Detected AMD64 architecture pulling....
         "
