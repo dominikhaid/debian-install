@@ -18,12 +18,10 @@ source $SCRIPTPATH/scripts/instDep.sh
 scriptDependend
 
                                                                           
-OS=$(cat logs/out/hardware_before.log | gawk -F: '{ print $2 }' | gawk -e 
-'match($0, /'Debian'/)')                                                  
+OS=$(cat logs/out/hardware_before.log | gawk -F: '{ print $2 }' | gawk -e 'match($0, /'Debian'/)')                                                  
                                                                           
 if ! [[ $OS == " " ]]; then                                               
-OS=$(cat logs/out/hardware_before.log | gawk -F: '{ print $2 }' | gawk -e 
-'match($0, /'Raspbian'/)')                                                
+OS=$(cat logs/out/hardware_before.log | gawk -F: '{ print $2 }' | gawk -e 'match($0, /'Raspbian'/)')                                                
 fi
 
 KERNEL=$(cat $SCRIPTPATH/logs/out/hardware_before.log | gawk -F: '{ print $1 $2}' | gawk -e 'match($0, /'Kernel'/)' | sed 's/Kernel//g')
@@ -44,8 +42,7 @@ if ! [[ $OS =~ "Debian" ]] && ! [[ $OS =~ "Raspbian" ]]; then
 	git checkout main && git pull
 fi
 
-if [[ $KERNEL =~ "armhf" ]] || [[ $KERNEL =~ "arm64" ]] || [[ $KERNEL =~ "
-arm7l" ]] || [[ $KERNEL =~ "v7l" ]]; then
+if [[ $KERNEL =~ "armhf" ]] || [[ $KERNEL =~ "arm64" ]] || [[ $KERNEL =~ "arm7l" ]] || [[ $KERNEL =~ "v7l" ]]; then
 	echo "
         Detected ARM architecture pulling....
         "
