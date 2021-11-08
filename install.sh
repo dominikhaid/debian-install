@@ -27,7 +27,9 @@ fi
 KERNEL=$(cat $SCRIPTPATH/logs/out/hardware_before.log | gawk -F: '{ print $1 $2}' | gawk -e 'match($0, /'Kernel'/)' | sed 's/Kernel//g')
 GPU=$(cat $SCRIPTPATH/logs/out/hardware_before.log | gawk -F: '{ print $1 $2}' | gawk -e 'match($0, /'GPU'/)' | sed 's/GPU//g')
 
-if ! [[ $OS =~ "Debian" ]]; then
+
+if ! [[ $OS =~ "Debian" ]] && ! [[ $OS =~ "Raspbian" ]]; then
+	echo "
 	echo "
         This script is written for Debian OS, the detect OS is: $OS.
         Aborting !!
