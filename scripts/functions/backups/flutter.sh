@@ -36,8 +36,8 @@ flutter() {
 EOF
 	}
 
-	fluttermain >$LOGPATH/out/nvim.log 2> \
-		$LOGPATH/err/nvim.log &
+	fluttermain >$LOGPATH/out/flutter.log 2> \
+		$LOGPATH/err/flutter.log &
 
 	setIndicator "Flutter / Dart" ${WORKINGICONS[2]} $!
 
