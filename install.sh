@@ -20,7 +20,7 @@ scriptDependend
                                                                           
 OS=$(cat logs/out/hardware_before.log | gawk -F: '{ print $2 }' | gawk -e 'match($0, /'Debian'/)')                                                  
                                                                           
-if ! [[ $OS == " " ]]; then                                               
+if ! [[ $OS =~ "Debian" ]]; then                                               
 OS=$(cat logs/out/hardware_before.log | gawk -F: '{ print $2 }' | gawk -e 'match($0, /'Raspbian'/)')                                                
 fi
 
