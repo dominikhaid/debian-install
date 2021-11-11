@@ -3,7 +3,6 @@
 ##
 #UFW
 ##
-source $SCRIPTPATH/scripts/setIndicator.sh
 
 ufw() {
 	ufwmain() {
@@ -25,9 +24,8 @@ EOF
 
 }
 
-if [[ ${1} == "--debug" ]]; then
-	USER_PASS=$3
-	USER_NAME=$2
-	USER_HOME=/home/$2
-	ufw
+if [ -z $DEV_MAIN_RUN ]; then
+	DEV_SINGLE_RUN=1
+	source ../../installer/globals/initMain.sh
+	runSingle ufw
 fi

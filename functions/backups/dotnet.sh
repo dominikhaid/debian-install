@@ -3,7 +3,6 @@
 ##
 # Dotnet
 ##
-source $SCRIPTPATH/scripts/setIndicator.sh
 
 dotnet() {
 	dotmain() {
@@ -46,9 +45,8 @@ EOF
 	fi
 }
 
-if [[ ${1} == "--debug" ]]; then
-	USER_PASS=$3
-	USER_NAME=$2
-	USER_HOME=/home/$2
-	dotnet
+if [ -z $DEV_MAIN_RUN ]; then
+	DEV_SINGLE_RUN=1
+	source ../../installer/globals/initMain.sh
+	runSingle dotnet
 fi

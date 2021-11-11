@@ -5,7 +5,7 @@
 #
 
 if ! [[ ${1} == "--debug" ]]; then
-	source $SCRIPTPATH/scripts/setIndicator.sh
+
 else
 	source ../../setIndicator.sh
 fi
@@ -71,9 +71,8 @@ EOF
 
 }
 
-if [[ ${1} == "--debug" ]]; then
-	USER_PASS=$3
-	USER_NAME=$2
-	USER_HOME=/home/$2
-	go
+if [ -z $DEV_MAIN_RUN ]; then
+	DEV_SINGLE_RUN=1
+	source ../../installer/globals/initMain.sh
+	runSingle go
 fi

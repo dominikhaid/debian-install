@@ -3,7 +3,6 @@
 ##
 # Clone Configs
 ##
-source $SCRIPTPATH/scripts/setIndicator.sh
 
 configs() {
 
@@ -114,9 +113,8 @@ EOF
 	setIndicator "SETTING UP DOTFILES & CONFIGS" ${WORKINGICONS[0]} $!
 }
 
-if [[ ${1} == "--debug" ]]; then
-	USER_PASS=$3
-	USER_NAME=$2
-	USER_HOME=/home/$2
-	configs
+if [ -z $DEV_MAIN_RUN ]; then
+	DEV_SINGLE_RUN=1
+	source ../../installer/globals/initMain.sh
+	runSingle configs
 fi

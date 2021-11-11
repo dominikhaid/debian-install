@@ -4,15 +4,6 @@
 #Nvim
 ##
 
-if ! [[ ${1} == "--debug" ]]; then
-	source $SCRIPTPATH/scripts/setIndicator.sh
-else
-	mkdir -p ../../../logs/err
-	mkdir -p ../../../logs/out
-	source ../../setIndicator.sh
-	LOGPATH="../../../logs"
-fi
-
 gitCli() {
 	gitmain() {
 		if ! command -v gh &>/dev/null; then
@@ -34,9 +25,8 @@ gitCli() {
 
 }
 
-if [[ ${1} == "--debug" ]]; then
-	USER_PASS=$3
-	USER_NAME=$2
-	USER_HOME=/home/$2
-	gitCli
+if [ -z $DEV_MAIN_RUN ]; then
+	DEV_SINGLE_RUN=1
+	source ../../installer/globals/initMain.sh
+	runSingle gitCli
 fi

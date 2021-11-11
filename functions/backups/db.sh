@@ -3,7 +3,6 @@
 ##
 # Databases / Tools
 #
-source $SCRIPTPATH/scripts/setIndicator.sh
 
 db() {
 
@@ -54,9 +53,8 @@ db() {
 	setIndicator "MONGO-COMPASS" ${WORKINGICONS[2]} $!
 }
 
-if [[ ${1} == "--debug" ]]; then
-	USER_PASS=$3
-	USER_NAME=$2
-	USER_HOME=/home/$2
-	db
+if [ -z $DEV_MAIN_RUN ]; then
+	DEV_SINGLE_RUN=1
+	source ../../installer/globals/initMain.sh
+	runSingle db
 fi

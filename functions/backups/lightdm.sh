@@ -3,7 +3,6 @@
 ##
 # lightdm
 ##
-source $SCRIPTPATH/scripts/setIndicator.sh
 
 lightdm() {
 	lightmain() {
@@ -37,9 +36,8 @@ EOF
 	$SCRIPTPATH/scripts/functions/backups/displaymanager.sh
 }
 
-if [[ ${1} == "--debug" ]]; then
-	USER_PASS=$3
-	USER_NAME=$2
-	USER_HOME=/home/$2
-	lightdm
+if [ -z $DEV_MAIN_RUN ]; then
+	DEV_SINGLE_RUN=1
+	source ../../installer/globals/initMain.sh
+	runSingle lightdm
 fi
