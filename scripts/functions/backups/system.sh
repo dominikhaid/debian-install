@@ -17,13 +17,13 @@ system() {
 			i3lock \
 			mpc \
 			xpad \
-			xserver-utils \
+                        x11-xserver-utils \
+                        xserver-xorg \
 			xserver-xephyr \
 			curl \
 			cups-pdf \
 			guvcview \
 			pasystray \
-			xserver-org \
 			systray-mdstat \
 			wget \
 			fuse \

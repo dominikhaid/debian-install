@@ -8,7 +8,7 @@ source $SCRIPTPATH/scripts/setIndicator.sh
 python() {
 
 	apt install -y python-pip
-	apt install -y pytho3-pip
+	apt install -y python3-pip
 
 	build() {
 		sudo -i -u $USER_NAME <<EOF
@@ -39,8 +39,8 @@ EOF
 
 	setIndicator "Python" ${WORKINGICONS[2]} $!
 
-	if [ -f "$USER_HOME/.local/bin/wal" ]; then
-		ln -s $USER_HOME/.local/bin/wal $USER_HOME/bin/wal
+	if [ -f "$USER_HOME/.local/bin/wal" ] && ! [ -f /usr/bin/wal ]; then
+		ln -s $USER_HOME/.local/bin/wal /usr/bin/wal
 	fi
 }
 
