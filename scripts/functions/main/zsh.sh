@@ -1,1 +1,0 @@
-../backups/zsh.sh
