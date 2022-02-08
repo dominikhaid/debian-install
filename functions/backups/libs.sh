@@ -16,7 +16,6 @@ libs() {
 			libavcodec-dev \
 			swig \
 			doxygen \
-                        Libtool-bin \
 			liblua5.3-dev \
 			python3-dev \
 			libedit-dev \
