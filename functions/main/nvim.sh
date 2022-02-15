@@ -15,7 +15,7 @@ nvim() {
     if ! [ -d "$USER_HOME/.local/share/nvim" ]; then
     git clone https://github.com/neovim/neovim.git $USER_HOME/.local/share/nvim
     cd $USER_HOME/.local/share/nvim
-    git checkout release-0.5
+    git checkout release-0.6
     git pull
     make CMAKE_BUILD_TYPE="RelWithDebInfo" CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$USER_HOME/.local/share/nvim"
     make install
