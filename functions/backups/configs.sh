@@ -4,6 +4,7 @@
 # Clone Configs
 ##
 
+
 configs() {
 
 	if [ -d "$SCRIPTPATH/debian-config" ]; then
@@ -27,7 +28,6 @@ configs() {
 			../configure
 			make
 			sudo make install
-
 		fi
 
 		if ! [ -d "$USER_HOME/dev/backups" ]; then mkdir -p $USER_HOME/dev/backups; fi
@@ -43,8 +43,7 @@ configs() {
 		if ! [ -d "/root/.vnc" ]; then mkdir /root/.vnc; fi
 		if ! [ -d "/etc/resolvconf/resolv.conf.d" ]; then mkdir -p /etc/resolvconf/resolv.conf.d; fi
 
-		cp -f $SCRIPTPATH/debian-config/user-config/raspi/x11vnc.service /etc/systemd/system/x11vnc.service
-		cp -f $SCRIPTPATH/debian-config/user-config/raspi/.asoundrc.hifiberry $USER_HOME/.asoundrc
+		cp -f $SCRIPTPATH/debian-config/vnc/x11vnc.service /etc/systemd/system/x11vnc.service
 		cp -f $SCRIPTPATH/debian-config/vnc/xstartup /root/.vnc/xstartup
 		cp -f $SCRIPTPATH/debian-config/vnc/tail /etc/resolvconf/resolv.conf.d/tail
 		cp -f $SCRIPTPATH/debian-config/qtile/qtile.desktop /usr/share/xsessions/qtile.desktop
@@ -52,7 +51,6 @@ configs() {
 		mkdir -p /media/share
 		chmod 777 /media/share
 
-		if [ -d $USER_HOME/.config/nvim ]; then rm -R $USER_HOME/.config/nvim; fi
 		if [ -d $USER_HOME/.vim ]; then rm -R $USER_HOME/.vim; fi
 
 		if [ -d "$USER_HOME/dev" ]; then chown -R $USER_NAME:$USER_NAME $USER_HOME/dev; fi
@@ -67,10 +65,16 @@ configs() {
     if ! [ -d $USER_HOME/dev ];then mkdir -p $USER_HOME/dev;fi
     cp -r $SCRIPTPATH/debian-config/user-config/dev/*  $USER_HOME/dev
     echo $USER_PASS | sudo -S ln -s $USER_HOME/dev/msmb.sh /usr/bin/msmb
+    fi
 
     if ! [ -d $USER_HOME/.themes ];then mkdir -p $USER_HOME/.themes;fi
     cp -r $SCRIPTPATH/debian-config/user-config/.themes $USER_HOME/
 
+    if ! [ -d $USER_HOME/dev/java ];then mkdir -p $USER_HOME/dev/java;fi
+    cp -r $SCRIPTPATH/debian-config/user-config/java/*  $USER_HOME/dev/java
+   
+    if [ -f /usr/bin/java-lsp.sh ];then echo $USER_PASS | sudo -S rm /usr/bin/java-lsp.sh;fi
+    echo $USER_PASS | sudo -S ln -s $USER_HOME/dev/java/java-lsp.sh /usr/bin/java-lsp.sh
 
     if ! [ -d $USER_HOME/.config ];then mkdir -p $USER_HOME/.config;fi
     cp -R -u $SCRIPTPATH/debian-config/user-config/.config/* $USER_HOME/.config/
@@ -80,7 +84,7 @@ configs() {
 
     if ! [ -d $USER_HOME/.vnc ];then mkdir -p $USER_HOME/.vnc;fi
     cp -f $SCRIPTPATH/debian-config/vnc/xstartup $USER_HOME/.vnc/xstartup
-    cp -f $SCRIPTPATH/debian-config/user-config/raspi/.pathrc $USER_HOME/.pathrc
+    cp -f $SCRIPTPATH/debian-config/user-config/.pathrc $USER_HOME/.pathrc
     cp -f $SCRIPTPATH/debian-config/user-config/.xprofile $USER_HOME/.xprofile
     cp -f $SCRIPTPATH/debian-config/user-config/.vimrc $USER_HOME/.vimrc
 
@@ -99,7 +103,6 @@ EOF
 		if ! [[ -f "/usr/bin/reset-wal" ]]; then cp $SCRIPTPATH/debian-config/user-config/reset-wal /usr/bin/reset-wal; fi
 
 		if [[ -f " $USER_HOME/.config/autostart/screenstart.sh" ]]; then ln -s $USER_HOME/.config/autostart/screenstart.sh /usr/lib/pm-utils/sleep.d/screenstart.sh; fi
-
 	}
 
 	cloneDot >$LOGPATH/out/dotfiles.log 2> \
@@ -111,10 +114,18 @@ EOF
 		$LOGPATH/err/config.log &
 
 	setIndicator "SETTING UP DOTFILES & CONFIGS" ${WORKINGICONS[0]} $!
+
+  if [ CONFIG_ONLY == 0 ]; then
+    echo "User config updated sucssesfully !"
+    exit
+  fi;
 }
 
+
+
 if [ -z $DEV_MAIN_RUN ]; then
-	DEV_SINGLE_RUN=1
-	source ../../installer/globals/initMain.sh
-	runSingle configs
+    DEV_SINGLE_RUN=1
+    source ../../installer/globals/initMain.sh
+    runSingle configs
 fi
+
