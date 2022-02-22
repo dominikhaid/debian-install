@@ -55,7 +55,7 @@ EOF
 
 	setIndicator "NVIM (building from source)" ${WORKINGICONS[0]} $!
 
-	if ! [ -L "/usr/bin/nvim" ]; then cp $SCRIPTPATH/debian-config/user-config/nvim /usr/bin/nvim; fi
+	if ! [ -f "/usr/bin/nvim" ]; then cp $SCRIPTPATH/debian-config/user-config/nvim /usr/bin/nvim; fi
 	if ! [ -d "$USER_HOME/dev/backups" ]; then mkdir -p $USER_HOME/dev/backups; fi
 	echo "0 5 * * 1 tar -zcf $(echo $USER_HOME)/dev/backups/nvim.tgz $(echo $USER_HOME)/.local/share/nvim" >>/var/spool/cron/crontabs/root
 
