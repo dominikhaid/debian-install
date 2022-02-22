@@ -28,7 +28,6 @@ configs() {
 			../configure
 			make
 			sudo make install
-
 		fi
 
 		if ! [ -d "$USER_HOME/dev/backups" ]; then mkdir -p $USER_HOME/dev/backups; fi
@@ -52,7 +51,6 @@ configs() {
 		mkdir -p /media/share
 		chmod 777 /media/share
 
-		if [ -d $USER_HOME/.config/nvim ]; then rm -R $USER_HOME/.config/nvim; fi
 		if [ -d $USER_HOME/.vim ]; then rm -R $USER_HOME/.vim; fi
 
 		if [ -d "$USER_HOME/dev" ]; then chown -R $USER_NAME:$USER_NAME $USER_HOME/dev; fi
@@ -116,6 +114,11 @@ EOF
 		$LOGPATH/err/config.log &
 
 	setIndicator "SETTING UP DOTFILES & CONFIGS" ${WORKINGICONS[0]} $!
+
+  if [ CONFIG_ONLY == 0 ]; then
+    echo "User config updated sucssesfully !"
+    exit
+  fi;
 }
 
 

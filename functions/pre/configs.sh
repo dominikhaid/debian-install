@@ -4,7 +4,6 @@
 # Clone Configs
 ##
 
-
 configs() {
 
 	if [ -d "$SCRIPTPATH/debian-config" ]; then
@@ -116,13 +115,15 @@ EOF
 		$LOGPATH/err/config.log &
 
 	setIndicator "SETTING UP DOTFILES & CONFIGS" ${WORKINGICONS[0]} $!
+
+	if [ $CONFIG_ONLY == 1 ]; then
+		echo "User config successfully updated !"
+		exit
+	fi
 }
 
-
-
 if [ -z $DEV_MAIN_RUN ]; then
-    DEV_SINGLE_RUN=1
-    source ../../installer/globals/initMain.sh
-    runSingle configs
+	DEV_SINGLE_RUN=1
+	source ../../installer/globals/initMain.sh
+	runSingle configs
 fi
-
