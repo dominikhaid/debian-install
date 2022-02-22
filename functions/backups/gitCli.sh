@@ -21,7 +21,7 @@ gitCli() {
 	setIndicator "GIT CLI" ${WORKINGICONS[1]} $!
 
 	if ! [ -d "$USER_HOME/dev/backups" ]; then mkdir -p $USER_HOME/dev/backups; fi
-	echo "0 5 * * 1 tar -zcf $(echo $USER_HOME)/dev/backups/nvim.tgz $(echo $USER_HOME)/.local/share/nvim" >>/var/spool/cron/crontabs/root
+	#echo "0 5 * * 1 tar -zcf $(echo $USER_HOME)/dev/backups/nvim.tgz $(echo $USER_HOME)/.local/share/nvim" >>/var/spool/cron/crontabs/root
 
 }
 
