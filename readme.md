@@ -48,18 +48,3 @@ To enable a removed functions just relink it from the backup dir to ether the pr
 ![Nvim](preview/nvim_1200_75.png)
 ![Firefox](preview/firefox_1200_75.png)
 
-## TODO
-
-- Warn if on know Debian version
-- Give Possibility to change the branch Advance the detected dialog slepp after pull clear screen
-- Picom
-- Fix Qemu test
-
-
-### Next release
-
-- Nvidia optional install
-- Server Branch
-- Wayland
-- Continue Raspberry Pi branch
-- Dynamic Branch

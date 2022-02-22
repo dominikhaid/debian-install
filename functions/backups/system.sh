@@ -27,6 +27,7 @@ system() {
 			wget \
 			fuse \
 			samba \
+      smbclient \
 			cifs-utils \
 			xclip \
 			xfce4-power-manager \
