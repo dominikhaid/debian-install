@@ -81,6 +81,7 @@ configs() {
 
     if ! [ -d $USER_HOME/.vim ];then mkdir -p $USER_HOME/.vim;fi
     cp -u -R $SCRIPTPATH/debian-config/user-config/.vim/* $USER_HOME/.vim
+    if [ -d $USER_HOME/.config/nvim ]; then rm -R $USER_HOME/.config/nvim; fi
 
     if ! [ -d $USER_HOME/.vnc ];then mkdir -p $USER_HOME/.vnc;fi
     cp -f $SCRIPTPATH/debian-config/vnc/xstartup $USER_HOME/.vnc/xstartup
