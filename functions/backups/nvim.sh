@@ -10,8 +10,6 @@ nvim() {
 		if [ -f "$USER_HOME/.local/bin/nvim" ]; then rm -R $USER_HOME/.local/bin/nvim; fi
 		if [ -d "$USER_HOME/.config/nvim" ]; then rm -R $USER_HOME/.config/nvim; fi
 
-		sudo -i -u $USER_NAME <<EOF
-
     if ! [ -d "$USER_HOME/.local/share/nvim" ]; then
     git clone https://github.com/neovim/neovim.git $USER_HOME/.local/share/nvim
     cd $USER_HOME/.local/share/nvim
@@ -19,8 +17,10 @@ nvim() {
     git pull
     make CMAKE_BUILD_TYPE="RelWithDebInfo" CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$USER_HOME/.local/share/nvim"
     make install
+    chown -R $USER_NAME:$USER_NAME $USER_HOME/.local/share/nvim/ 
     fi
-
+		
+    sudo -i -u $USER_NAME <<EOF
     cd $USER_HOME && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
     python3 -m pip install --user --upgrade pynvim
@@ -44,7 +44,6 @@ nvim() {
     git clone https://github.com/wbthomason/packer.nvim $USER_HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
     git clone https://github.com/kabouzeid/nvim-lspinstall $USER_HOME/.local/share/nvim/site/pack/packer/start/nvim-lspinstall
 
-    echo $USER_PASS | sudo -S chown -R $USER_NAME:$USER_NAME $USER_HOME/.local/share/nvim/ 
     
    sed -i 's/--require/require/g' $USER_HOME/.config/nvim/init.lua
    sed -i 's/--vim\./vim./g' $USER_HOME/.config/nvim/init.lua 
