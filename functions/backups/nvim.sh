@@ -8,7 +8,6 @@ nvim() {
 	nvimmain() {
 	#	if [ -d "$USER_HOME/.local/share/nvim" ]; then rm -R $USER_HOME/.local/share/nvim; fi
 		if [ -f "$USER_HOME/.local/bin/nvim" ]; then rm -R $USER_HOME/.local/bin/nvim; fi
-		if [ -d "$USER_HOME/.config/nvim" ]; then rm -R $USER_HOME/.config/nvim; fi
 
     if ! [ -d "$USER_HOME/.local/share/nvim" ]; then
     git clone https://github.com/neovim/neovim.git $USER_HOME/.local/share/nvim
