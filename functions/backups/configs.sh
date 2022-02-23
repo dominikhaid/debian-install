@@ -116,7 +116,7 @@ EOF
 
 	setIndicator "SETTING UP DOTFILES & CONFIGS" ${WORKINGICONS[0]} $!
 
-  if [ CONFIG_ONLY == 0 ]; then
+  if [ CONFIG_ONLY == 1 ]; then
     echo "User config updated sucssesfully !"
     exit
   fi;
