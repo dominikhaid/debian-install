@@ -118,6 +118,7 @@ EOF
 
   if [ CONFIG_ONLY == 1 ]; then
     echo "User config updated sucssesfully !"
+    diable_git_conf
     exit
   fi;
 }
