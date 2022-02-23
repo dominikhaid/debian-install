@@ -118,6 +118,7 @@ EOF
 
   if [ CONFIG_ONLY == 0 ]; then
     echo "User config updated sucssesfully !"
+    disable_git_conf
     exit
   fi;
 }
