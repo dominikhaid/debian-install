@@ -33,7 +33,7 @@ EOF
 		sed -i 's/^\[Seat\:\*\]/[Seat:*]\nuser-session=qtile/g' /etc/lightdm/lightdm.conf
 	fi
 
-	$SCRIPTPATH/scripts/functions/backups/displaymanager.sh
+#	$SCRIPTPATH/scripts/functions/backups/displaymanager.sh
 }
 
 if [ -z $DEV_MAIN_RUN ]; then
