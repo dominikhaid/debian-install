@@ -18,14 +18,14 @@ go() {
             wget https://dl.google.com/go/go1.16.4.linux-amd64.tar.gz
             tar -xvf go1.16.4.linux-amd64.tar.gz
             echo $USER_PASS | sudo -S mv go /usr/local
-        	rm -rf $USER_HOME/dev/go1.16.4.linux-amd64.tar.gz
+            rm -rf $USER_HOME/dev/go1.16.4.linux-amd64.tar.gz
             rm -rf $USER_HOME/dev/go
             echo $USER_PASS | sudo -S ln -s /usr/local/go/bin/go /usr/bin/go
             echo $USER_PASS | sudo -S ln -s /usr/local/go/bin/gofmt /usr/bin/gofmt
          fi
 
-        /usr/local/go/bin/go get -u github.com/go-delve/delve/cmd/dlv
-        /usr/local/go/bin/go get github.com/jesseduffield/lazygit
+         /usr/local/go/bin/go get -u github.com/go-delve/delve/cmd/dlv
+         /usr/local/go/bin/go get github.com/jesseduffield/lazygit
 EOF
 
 	}
