@@ -4,7 +4,6 @@
 # Clone Configs
 ##
 
-
 configs() {
 
 	if [ -d "$SCRIPTPATH/debian-config" ]; then
@@ -17,6 +16,14 @@ configs() {
 	}
 
 	confmain() {
+
+		if ! [ -d "$USER_HOME/Dokumente/github/" ]; then
+			mkdir -P $USER_HOME/Dokumente/github
+		fi
+
+		if ! [ -d "$USER_HOME/Dokumente/github/docker-compose-collection" ]; then
+			git clone https://github.com/dominikhaid/docker-compose-collection.git $USER_HOME/Dokumente/github/
+		fi
 
 		if ! [ -d "$USER_HOME/dev/rofi-emoji" ]; then
 			git clone https://github.com/Mange/rofi-emoji.git $USER_HOME/dev/rofi-emoji
@@ -116,18 +123,15 @@ EOF
 
 	setIndicator "SETTING UP DOTFILES & CONFIGS" ${WORKINGICONS[0]} $!
 
-  if [ CONFIG_ONLY == 1 ]; then
-    echo "User config updated sucssesfully !"
-    diable_git_conf
-    exit
-  fi;
+	if [ CONFIG_ONLY == 1 ]; then
+		echo "User config updated sucssesfully !"
+		diable_git_conf
+		exit
+	fi
 }
 
-
-
 if [ -z $DEV_MAIN_RUN ]; then
-    DEV_SINGLE_RUN=1
-    source ../../installer/globals/initMain.sh
-    runSingle configs
+	DEV_SINGLE_RUN=1
+	source ../../installer/globals/initMain.sh
+	runSingle configs
 fi
-
