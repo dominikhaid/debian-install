@@ -4,12 +4,6 @@
 #GO
 #
 
-if ! [[ ${1} == "--debug" ]]; then
-
-else
-	source ../../setIndicator.sh
-fi
-
 go() {
 	gomain() {
 		sudo -i -u $USER_NAME <<EOF
