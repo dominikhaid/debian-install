@@ -15,10 +15,10 @@ go() {
 		sudo -i -u $USER_NAME <<EOF
          if ! [ -d /usr/local/go ]; then
             cd $USER_HOME/dev
-            wget https://dl.google.com/go/go1.16.4.linux-amd64.tar.gz
-            tar -xvf go1.16.4.linux-amd64.tar.gz
+            wget https://dl.google.com/go/go1.16.4.linux-arm64.tar.gz
+            tar -xvf go1.16.4.linux-arm64.tar.gz
             echo $USER_PASS | sudo -S mv go /usr/local
-            rm -rf $USER_HOME/dev/go1.16.4.linux-amd64.tar.gz
+            rm -rf $USER_HOME/dev/go1.16.4.linux-arm64.tar.gz
             rm -rf $USER_HOME/dev/go
             echo $USER_PASS | sudo -S ln -s /usr/local/go/bin/go /usr/bin/go
             echo $USER_PASS | sudo -S ln -s /usr/local/go/bin/gofmt /usr/bin/gofmt
