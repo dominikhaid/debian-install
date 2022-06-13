@@ -11,6 +11,7 @@ system() {
 			htop \
 			xinit \
 			rsync \
+			figlet \
 			mpc \
 			xpad \
 			x11-xserver-utils \
