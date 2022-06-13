@@ -12,6 +12,7 @@ system() {
 			xinit \
 			rsync \
 			figlet \
+      zsh \
 			mpc \
 			xpad \
 			x11-xserver-utils \
