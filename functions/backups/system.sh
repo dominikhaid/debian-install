@@ -44,7 +44,6 @@ system() {
 			gnupg \
 			dbus \
 			iputils-ping \
-			python \
 			ripgrep \
 			ca-certificates \
 			tightvncserver \
