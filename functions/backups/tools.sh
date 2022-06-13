@@ -13,39 +13,8 @@ tools() {
     libreoffice \
     remmina \
     rofi \
-    evolution \
-    qbittorrent \
-    vlc \
-    gimp \
-    inkscape \
-    cowsay \
-    kdenlive \
-    fortune 
+    evolution
 EOF
-	}
-
-	kodi() {
-		sudo -i -u $USER_NAME <<EOF
-    echo $USER_PASS | sudo -S apt install -yq \
-    kodi \
-    kodi-inputstream-rtmp \
-    kodi-inputstream-adaptive 
-EOF
-	}
-
-	vscode() {
-		if ! command -v code &>/dev/null; then
-			sudo -i -u $USER_NAME <<EOF
-			wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor >packages.microsoft.gpg
-			echo $USER_PASS | sudo -S install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
-			echo $USER_PASS | sudo -S sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-			
-            echo $USER_PASS | sudo -S rm -f packages.microsoft.gpg
-            echo $USER_PASS | sudo -S apt update
-            echo $USER_PASS | sudo -S apt upgrade -y
-            echo $USER_PASS | sudo -S apt install -y code code-insiders
-EOF
-		fi
 	}
 
 	shformat() {
@@ -104,11 +73,6 @@ EOF
             prettier"
 
 	}
-
-	kodi >$LOGPATH/out/kodi.log 2> \
-		$LOGPATH/err/kodi.log &
-
-	setIndicator "KODI" ${WORKINGICONS[4]} $!
 
 	npmG >$LOGPATH/out/npm_globals.log 2> \
 		$LOGPATH/err/npm_globals.log &
