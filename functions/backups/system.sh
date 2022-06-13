@@ -8,18 +8,14 @@ system() {
 
 	sysmain() {
 		apt install -y \
-			sudo \
 			htop \
 			xinit \
 			rsync \
-			git \
-			i3lock \
 			mpc \
 			xpad \
 			x11-xserver-utils \
 			xserver-xorg \
 			xserver-xephyr \
-			curl \
 			cups-pdf \
 			guvcview \
 			pasystray \
@@ -48,20 +44,15 @@ system() {
 			dbus \
 			iputils-ping \
 			python \
-			figlet \
-			bluetooth \
-			nginx \
-			apache2 \
 			ripgrep \
 			ca-certificates \
 			tightvncserver \
-			cmst \
 			zsh \
 			vim \
 			tree \
 			fd-find \
 			fonts-firacode \
-			kitty \
+			alacrity \
 			fzf \
 			cups \
 			imagemagick \
